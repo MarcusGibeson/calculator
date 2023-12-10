@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class Calculator {
     private String expression;
-    private Double result;
+    private double result;
 
     public Calculator() {
     }
@@ -14,21 +14,8 @@ public class Calculator {
         this.result = result;
     }
 
-    //getters and setters
-    public String expression() {
-        return expression;
-    }
-    public void setExpression() {
-        this.expression = expression;
-    }
-    public Double result() {
-        return result;
-    }
-    public void setResult() {
-        this.result = result;
-    }
 
-    public Double calculate(String expression) {
+    public double calculate(String expression) {
         try {
             String [] tokens = expression.split("\\s");
 
@@ -71,6 +58,9 @@ public class Calculator {
             }
 
             //The result should be the only element in the operands stack
+            if (operands.size() != 1) {
+                throw new RuntimeException("Invalid expression: " + expression);
+            }
             return operands.pop();
         } catch (Exception e) {
             throw new RuntimeException("Invalid expression: "+ expression, e);
@@ -97,7 +87,7 @@ public class Calculator {
             case '+':
                 operands.push(operand1 + operand2);
                 break;
-            case '.':
+            case '-':
                 operands.push(operand1 - operand2);
                 break;
             case '*':
@@ -115,5 +105,19 @@ public class Calculator {
             
         }   
     }
-    
+
+    //getters and setters
+    public String getExpression() {
+        return expression;
+    }
+    public void setExpression(String expression) {
+        this.expression = expression;
+    }
+    public double getResult() {
+        return result;
+    }
+    public void setResult(double result) {
+        this.result = result;
+    }
+
 }   
