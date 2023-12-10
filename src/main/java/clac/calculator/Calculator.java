@@ -1,22 +1,28 @@
 package clac.calculator;
 
+import java.util.Map;
 import java.util.Stack;
+import java.util.function.Function;
 
 public class Calculator {
     private String expression;
     private double result;
 
+    private Map<String, Function<Stack<Double>, Double>> functions;
+
     public Calculator() {
     }
 
-    public Calculator(String expression, Double result) {
+    public Calculator(String expression, Double result, Map<String, Function<Stack<Double>, Double>> functions) {
         this.expression = expression;
         this.result = result;
+        this.functions = functions;
     }
 
 
     public double calculate(String expression) {
         try {
+            this.expression = expression;
             String [] tokens = expression.split("\\s");
 
             Stack<Double> operands = new Stack<>();
@@ -64,6 +70,16 @@ public class Calculator {
             return operands.pop();
         } catch (Exception e) {
             throw new RuntimeException("Invalid expression: "+ expression, e);
+        }
+    }
+
+    private void processFunction(String functionName, Stack<Double> operands) {
+        Function<Stack<Double>, Double> function = functions.get(functionName);
+        if (function != null) {
+            double result = function.apply(operands);
+            operands.push(result);
+        } else {
+            throw new RuntimeException("Unknown function: " + functionName);
         }
     }
 
@@ -118,6 +134,14 @@ public class Calculator {
     }
     public void setResult(double result) {
         this.result = result;
+    }
+
+    public Map<String, Function<Stack<Double>, Double>> getFunctions() {
+        return functions;
+    }
+
+    public void setFunctions(Map<String, Function<Stack<Double>, Double>> functions) {
+        this.functions = functions;
     }
 
 }   
