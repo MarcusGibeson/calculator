@@ -4,6 +4,9 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.function.Function;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Calculator {
     private String expression;
     private double result;
