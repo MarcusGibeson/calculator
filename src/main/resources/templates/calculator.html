@@ -54,8 +54,8 @@
         
         <div>
             <th:block th:each="button : ${calculatorButtons}">
-                <button th:text="${button}" type="button" th:onclick="'appendToExpression(\'' + ${button} + '\')'"
-                        th:class="${button == '='} ? 'operator' : ''"></button>
+                <button th:text="${button}" type="button" th:onclick="'appendToExpression(\'' + ${button} + '\')'" 
+                        th:class="${button == '=' ? 'operator' : ''}"></button>
             </th:block>
         </div>
 
