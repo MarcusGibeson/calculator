@@ -10,5 +10,9 @@ public class CalculatorController {
     public CalculatorController(CalculatorService calculatorService) {
         this.calculatorService = calculatorService;
     }
-    
+
+    @GetMapping("/")
+    public String calculator(Model model) {
+        List
+    }
 }
